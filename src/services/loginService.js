@@ -26,8 +26,11 @@ async function loginFromGoogleSheet(email, password) {
     },
   };
 }
+
 function loginFromMock(email, password) {
-  const match = mockUsers.find((item) => item.email.toLowerCase() === email.toLowerCase());
+  const match = mockUsers.find(
+    (item) => item.email.toLowerCase() === email.toLowerCase()
+  );
 
   if (!match || match.password !== password) {
     throw new Error('Invalid email or password.');
@@ -37,30 +40,6 @@ function loginFromMock(email, password) {
     throw new Error('Your account is inactive. Please contact your administrator.');
   }
 
-  return {
-    user: {
-      id: match.id,
-       name: match.name,
-      email: match.email,
-      role: match.role,
-      status: match.status,
-    },
-  };
-}
-
-export async function }
-
-function loginFromMock(email, password) {
-  const match = mockUsers.find((item) => item.email.toLowerCase() === email.toLowerCase());
-
-  if (!match || match.password !== password) {
-    throw new Error('Invalid email or password.');
-  }
-
-  if (match.status !== 'active') {
-    throw new Error('Your account is inactive. Please contact your administrator.');
-  }
-  
   return {
     user: {
       id: match.id,
@@ -72,4 +51,19 @@ function loginFromMock(email, password) {
   };
 }
 
-export async function
+export async function loginWithSheetCredentials(email, password) {
+  if (!email || !password) {
+    throw new Error('Please enter both email and password.');
+  }
+
+  if (GOOGLE_SHEETS_ENDPOINT) {
+    try {
+      return await loginFromGoogleSheet(email, password);
+    } catch (error) {
+      console.warn('Falling back to mock login:', error.message);
+    }
+  }
+
+  await new Promise((resolve) => setTimeout(resolve, 700));
+  return loginFromMock(email, password);
+}
