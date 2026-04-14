@@ -10,25 +10,32 @@ export default function GroupsPage() {
   return (
     <div className="page-grid">
       <div className="page-toolbar card">
+        <div className="panel-glow" />
         <div>
           <p className="eyebrow">Group management</p>
           <h1>Create focused workspaces for teams and projects.</h1>
         </div>
+
         <button className="primary-btn" onClick={() => setOpen(true)}>
           <Plus size={16} /> New Group
         </button>
-          </div>
+      </div>
 
       <div className="group-grid">
         {groups.map((group) => (
           <div className="card group-card" key={group.id}>
+            <div className="panel-glow" />
             <p className="eyebrow">Workspace</p>
             <h3>{group.name}</h3>
+
             <div className="member-stack">
               {group.members.map((member) => (
-                <span className="member-chip selected" key={member}>{member}</span>
+                <span className="member-chip selected" key={member}>
+                  {member}
+                </span>
               ))}
             </div>
+
             <div className="group-footer">
               <span>{group.members.length} members</span>
               <button className="secondary-btn">Open Chat</button>
@@ -37,7 +44,11 @@ export default function GroupsPage() {
         ))}
       </div>
 
-      <GroupFormModal open={open} onClose={() => setOpen(false)} onCreate={(group) => setGroups((prev) => [group, ...prev])} />
+      <GroupFormModal
+        open={open}
+        onClose={() => setOpen(false)}
+        onCreate={(group) => setGroups((prev) => [group, ...prev])}
+      />
     </div>
   );
 }
