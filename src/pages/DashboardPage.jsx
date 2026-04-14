@@ -11,18 +11,27 @@ export default function DashboardPage() {
   return (
     <div className="page-grid">
       <section className="hero-panel card">
-        <div>
+        <div className="panel-glow" />
+        <div className="hero-copy">
           <p className="eyebrow">Team performance</p>
           <h1>Execution visibility that feels calm, clear, and premium.</h1>
           <p className="muted-text">
             Track assignments, monitor momentum, and keep teams aligned with one connected workspace.
           </p>
         </div>
+
         <div className="hero-actions">
-          <div className="kpi-chip">Today: {metrics.assignedToday} assignments</div>
-          <div className="kpi-chip">Completion: {metrics.completionRate}%</div>
+          <div className="kpi-chip">
+            <span className="kpi-chip-label">Today</span>
+            <strong>{metrics.assignedToday} assignments</strong>
+          </div>
+
+          <div className="kpi-chip">
+            <span className="kpi-chip-label">Completion</span>
+            <strong>{metrics.completionRate}%</strong>
+          </div>
         </div>
-        </section>
+      </section>
 
       <section className="metrics-grid">
         <MetricCard label="Total tasks" value={metrics.total} hint="Across all active teams" accent="blue" />
@@ -34,7 +43,8 @@ export default function DashboardPage() {
       <section className="dashboard-layout">
         <ProgressPanel completionRate={metrics.completionRate} />
 
-        <div className="card">
+        <div className="card dashboard-card">
+          <div className="panel-glow" />
           <div className="panel-header">
             <div>
               <p className="eyebrow">Recent tasks</p>
@@ -46,7 +56,7 @@ export default function DashboardPage() {
             {tasks.slice(0, 4).map((task) => (
               <div key={task.id} className="list-row">
                 <div>
-                   <strong>{task.title}</strong>
+                  <strong>{task.title}</strong>
                   <p>{task.assignedTo} • {task.severity}</p>
                 </div>
                 <span className={`badge status-${task.status.toLowerCase()}`}>{task.status}</span>
@@ -57,14 +67,15 @@ export default function DashboardPage() {
       </section>
 
       <section className="dashboard-layout two-col">
-        <div className="card">
+        <div className="card dashboard-card">
+          <div className="panel-glow" />
           <div className="panel-header">
             <div>
               <p className="eyebrow">Activity timeline</p>
               <h3>Recent workflow events</h3>
             </div>
           </div>
-          
+
           <div className="timeline">
             {tasks.slice(0, 4).map((task) => (
               <div key={task.id} className="timeline-item">
@@ -78,15 +89,19 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        <div className="card">
+        <div className="card dashboard-card">
+          <div className="panel-glow" />
           <div className="panel-header">
             <div>
               <p className="eyebrow">Notifications</p>
               <h3>Important reminders</h3>
             </div>
           </div>
+
           <div className="stack-list">
-            {notifications.slice(0, 3).map((item) => <NotificationCard key={item.id} item={item} />)}
+            {notifications.slice(0, 3).map((item) => (
+              <NotificationCard key={item.id} item={item} />
+            ))}
           </div>
         </div>
       </section>
