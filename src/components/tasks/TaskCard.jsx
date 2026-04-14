@@ -6,22 +6,28 @@ export default function TaskCard({ task, onToggle }) {
 
   return (
     <div className="card task-card">
+      <div className="panel-glow" />
+
       <div className="task-head">
-        <div>
-          <div className={`badge severity-${task.severity.toLowerCase()}`}>{task.severity}</div>
+        <div className="task-title-wrap">
+          <div className={`badge severity-${task.severity.toLowerCase()}`}>
+            {task.severity}
+          </div>
           <h3>{task.title}</h3>
         </div>
+
         <div className={`badge status-${task.status.toLowerCase()}`}>{task.status}</div>
       </div>
 
-      <p className="muted-text">{task.description}</p>
+      <p className="muted-text task-description">{task.description}</p>
 
       <div className="task-meta-grid">
-        <div>
+        <div className="task-meta-card">
           <span>Assigned to</span>
           <strong>{task.assignedTo}</strong>
         </div>
-        <div>
+
+        <div className="task-meta-card">
           <span>Assigned by</span>
           <strong>{task.assignedBy}</strong>
         </div>
@@ -29,7 +35,7 @@ export default function TaskCard({ task, onToggle }) {
 
       <div className="subtask-list">
         {task.subtasks?.map((subtask) => (
- <div key={subtask} className="subtask-row">
+          <div key={subtask} className="subtask-row">
             <CheckCheck size={14} />
             <span>{subtask}</span>
           </div>
@@ -41,17 +47,24 @@ export default function TaskCard({ task, onToggle }) {
           <CalendarClock size={14} />
           <span>{formatDate(task.deadline)}</span>
         </div>
+
         <div className="task-actions-inline">
           {task.proofLink && (
-            <a href={task.proofLink} target="_blank" rel="noreferrer" className="text-link">
+            <a
+              href={task.proofLink}
+              target="_blank"
+              rel="noreferrer"
+              className="text-link"
+            >
               Proof <ExternalLink size={14} />
             </a>
           )}
-          <button className="secondary-btn" onClick={() => onToggle(task)}>
+
+          <button className="secondary-btn" onClick={() => onToggle(task)} type="button">
             {task.status === 'Completed' ? 'Mark Pending' : 'Mark Complete'}
           </button>
         </div>
       </div>
     </div>
-      );
+  );
 }
