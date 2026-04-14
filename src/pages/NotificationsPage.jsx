@@ -7,6 +7,7 @@ export default function NotificationsPage() {
   return (
     <div className="page-grid">
       <div className="page-toolbar card">
+        <div className="panel-glow" />
         <div>
           <p className="eyebrow">Notifications</p>
           <h1>Stay ahead of assignments, deadlines, and updates.</h1>
@@ -18,6 +19,6 @@ export default function NotificationsPage() {
           <NotificationCard key={item.id} item={item} />
         ))}
       </div>
-     </div>
+    </div>
   );
 }
