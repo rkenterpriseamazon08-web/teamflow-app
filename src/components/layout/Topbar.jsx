@@ -1,4 +1,4 @@
-import { LogOut, Search } from 'lucide-react';
+import { LogOut, Search, Sparkles } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { getInitials } from '../../utils/helpers';
 
@@ -7,7 +7,7 @@ export default function Topbar() {
 
   return (
     <header className="topbar">
-      <div>
+      <div className="topbar-copy">
         <p className="eyebrow">Premium workspace</p>
         <h2>Welcome back, {user?.name?.split(' ')[0]}</h2>
       </div>
@@ -17,14 +17,21 @@ export default function Topbar() {
           <Search size={16} />
           <input placeholder="Search tasks, groups, people..." />
         </div>
-  <div className="user-pill">
+
+        <div className="workspace-chip">
+          <Sparkles size={14} />
+          <span>Live workspace</span>
+        </div>
+
+        <div className="user-pill">
           <div className="avatar">{getInitials(user?.name)}</div>
           <div>
             <strong>{user?.name}</strong>
             <span>{user?.role}</span>
           </div>
         </div>
-        <button className="icon-btn" onClick={logout} title="Logout">
+
+        <button className="icon-btn" onClick={logout} title="Logout" type="button">
           <LogOut size={16} />
         </button>
       </div>
