@@ -25,34 +25,57 @@ export default function LoginPage() {
     }
   };
 
- return (
+  return (
     <div className="login-page">
       <div className="login-backdrop" />
+      <div className="login-orb login-orb-one" />
+      <div className="login-orb login-orb-two" />
+      <div className="login-grid-lines" />
+
       <section className="login-hero">
         <div className="hero-badge">Independent collaboration platform</div>
-        <h1>Run tasks, chats, groups, and execution visibility in one premium workspace.</h1>
+
+        <h1>
+          Run tasks, chats, groups, and execution visibility in one
+          <span className="gradient-text"> premium workspace.</span>
+        </h1>
+
         <p>
           Designed for fast-moving teams that need assignment clarity, real-time conversations,
           notification workflows, and dashboard-level visibility without the clutter.
         </p>
 
         <div className="hero-points">
-          <div className="mini-card"><Sparkles size={18} /> Premium SaaS dashboard experience</div>
-          <div className="mini-card"><Workflow size={18} /> Tasks, groups, chat, and analytics together</div>
-          <div className="mini-card"><ShieldCheck size={18} /> Google Sheets login + Firebase-ready architecture</div>
+          <div className="mini-card">
+            <Sparkles size={18} />
+            <span>Premium SaaS dashboard experience</span>
+          </div>
+
+          <div className="mini-card">
+            <Workflow size={18} />
+            <span>Tasks, groups, chat, and analytics together</span>
+          </div>
+
+          <div className="mini-card">
+            <ShieldCheck size={18} />
+            <span>Google Sheets login + Firebase-ready architecture</span>
+          </div>
         </div>
-        </section>
+      </section>
 
       <section className="login-panel card">
+        <div className="panel-glow" />
         <div>
           <p className="eyebrow">Welcome back</p>
           <h2>Sign in to your workspace</h2>
-          <span className="muted-text">Use your credentials from Google Sheets. Mock login works too.</span>
+          <span className="muted-text">
+            Use your credentials from Google Sheets. Mock login works too.
+          </span>
         </div>
 
         <form className="form-grid" onSubmit={handleSubmit}>
-          <label className="full-span">
-            Email
+          <label className="full-span field-block">
+            <span className="field-label-title">Email</span>
             <input
               type="email"
               placeholder="aarav@teamflow.ai"
@@ -61,11 +84,11 @@ export default function LoginPage() {
             />
           </label>
 
-          <label className="full-span">
-            Password
+          <label className="full-span field-block">
+            <span className="field-label-title">Password</span>
             <input
-              type="password" 
-             placeholder="Enter password"
+              type="password"
+              placeholder="Enter password"
               value={form.password}
               onChange={(e) => setForm({ ...form, password: e.target.value })}
             />
@@ -73,7 +96,7 @@ export default function LoginPage() {
 
           {error && <div className="error-box full-span">{error}</div>}
 
-          <button className="primary-btn full-span" disabled={loading}>
+          <button className="primary-btn full-span primary-btn-lg" disabled={loading}>
             {loading ? 'Signing in...' : <>Enter Workspace <ArrowRight size={16} /></>}
           </button>
         </form>
